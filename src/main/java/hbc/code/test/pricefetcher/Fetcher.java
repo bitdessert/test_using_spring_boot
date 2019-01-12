@@ -1,17 +1,11 @@
 package hbc.code.test.pricefetcher;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import hbc.code.test.pricefetcher.FAO.FAO;
 
-//import org.json.JSONObject;
 import hbc.code.test.pricefetcher.constants.CoinConstants;
 import hbc.code.test.pricefetcher.vo.FetcherVO;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,18 +20,11 @@ public class Fetcher {
             priceObj = new JsonParser().parse(new FileReader(fao.getFile())).getAsJsonObject();
         }catch (IOException e){
             System.out.println("File not found");
-//        }catch (ParseException e){
-//            System.out.println("parse error");
-//
         }
 
 
     }
 
-//    private JSONObject getPriceObj(){
-//        return this.priceObj;
-//    }
-//
     private void setVo(FetcherVO vo, String coinName, String marketName, String priceKeyName){
         vo.setCoin(coinName);
         vo.setLastPrice(priceObj.getAsJsonObject(coinName).getAsJsonObject(marketName).getAsJsonPrimitive(priceKeyName).getAsString());

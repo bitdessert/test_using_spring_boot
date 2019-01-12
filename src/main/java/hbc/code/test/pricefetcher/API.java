@@ -1,10 +1,6 @@
 package hbc.code.test.pricefetcher;
 
-import com.google.gson.JsonObject;
-import org.json.simple.JSONObject;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
