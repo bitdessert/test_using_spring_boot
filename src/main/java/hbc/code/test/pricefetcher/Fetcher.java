@@ -9,6 +9,7 @@ import hbc.code.test.pricefetcher.vo.FetcherVO;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Fetcher {
 
@@ -55,11 +56,16 @@ public class Fetcher {
 
     public JsonObject fetchPrice(String currency){
         FetcherVO vo = new FetcherVO();
-        System.out.println(CoinConstants.DEFAULT_COIN.get(currency.toUpperCase()));
-        setVo(vo, CoinConstants.DEFAULT_COIN.get(currency.toUpperCase()), "bithumb", "last");
-
+//        System.out.println(CoinConstants.DEFAULT_COIN.get(currency.toUpperCase()));
+        String[] currencies = {"BTH","ETH","BHC","EOS", "XRP"};
         JsonObject response = new JsonObject();
-        response.addProperty(CoinConstants.DEFAULT_COIN.get(currency.toUpperCase()), vo.getLastPrice());
+        if (!Arrays.stream(currencies).anyMatch(currency::equals)){
+             response.addProperty("err", "I have not your currency");
+        }else{
+            setVo(vo, CoinConstants.DEFAULT_COIN.get(currency.toUpperCase()), "bithumb", "last");
+            response.addProperty(CoinConstants.DEFAULT_COIN.get(currency.toUpperCase()), vo.getLastPrice());
+        }
+
         return response;
     }
 }
